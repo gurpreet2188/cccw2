@@ -16,6 +16,7 @@ function App() {
 
       const d = res.json()
       console.log(d)
+      console.log(d)
     }
     f()
   }, [])

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function Crpyto() {
+export default function stocks() {
     const [data, SetData] = useState()
 
     useEffect(() => {

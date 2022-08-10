@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
 
-export default function Crpyto() {
+export default function Crpyto(cryptoName) {
     const [data, SetData] = useState()
     //current price
-    let ids = 'bitcoin'
     let vs_currencies = 'usd'
-    let currentPriceURL = 'https://api.coingecko.com/api/v3/simple/price?ids=' + ids + '&vs_currencies=' + vs_currencies
+    let currentPriceURL = 'https://api.coingecko.com/api/v3/simple/price?ids=' + cryptoName + '&vs_currencies=' + vs_currencies
 
     //historical data
     let day = 30
@@ -21,22 +20,6 @@ export default function Crpyto() {
         }
         f()
     }, [])
-
-    // return (
-    //     <div className="Crypto">
-    //     {data?.entries?.map((v, i) => {
-    //     return(
-    //      <>
-    //       <p>
-    //         {
-    //           v.bitcoin.usd
-    //         }
-    //       </p>
-    //      </>  
-    //     )
-    //     })}
-    //     </div>
-    // );
 
     return data
 }

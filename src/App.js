@@ -6,6 +6,8 @@ function App() {
   const cryptoData = Crypto()
   console.log(cryptoData)
 
+  
+
   return (
     <div className="App">
     </div>

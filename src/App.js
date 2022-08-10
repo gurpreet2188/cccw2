@@ -14,7 +14,7 @@ function App() {
         }
       })
 
-      const d = res.json()
+      const d = await res.json()
       console.log(d)
     }
     f()

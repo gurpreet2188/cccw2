@@ -17,13 +17,13 @@ export default function stocks(stockCode) {
 
         const stocksCSV = async () => {
             // const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=IBM&interval=15min&slice=year1month1&apikey=demo`)
-            Papa.parse('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=IBM&interval=15min&slice=year1month1&apikey=demo', {
+            Papa.parse(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=${stockCode}&interval=15min&slice=year1month1&apikey=JHCGXCD0QXPF0BEV`, {
                 download: true,
                 header: true,
                 skipEmptyLines: true,
                 complete: (r)=> {
-                    // setHisData(r.data)
-                    console.log(r.data)
+                    setHisData(r.data)
+                    // console.log(r.data)
                 }
             })
 

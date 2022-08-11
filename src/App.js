@@ -10,14 +10,17 @@ function App() {
   const profitRate = (currentPrice - pastPrice) / pastPrice * 100;
   console.log(cCurrentData)
   console.log(cHistoricalData)
-  console.log(cTrendingData)
+  console.log(cTrendingData?.coins[0]?.item?.name)
 
   return <div className="App">
 
     <h1>{cName}</h1>
     <p>current price: {currentPrice}</p>
-    <p>past price: {pastPrice}</p>
     <p>profit rate: {(profitRate).toFixed(2)}%</p>
+    <h2>top 7 trending coins</h2>
+    {cTrendingData ? cTrendingData?.coins.map((v, i) => {
+      return(<p>{i + 1}. {v?.item?.name}</p>)
+    }) : 'Loading...'}
   </div>;
 }
 

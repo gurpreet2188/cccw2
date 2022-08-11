@@ -4,13 +4,10 @@ import Crypto from "./data/crpyto";
 
 function App() {
   const cName = 'bitcoin'
-  const cryptoData = Crypto(cName);
-  const cCurrentData = cryptoData[0];
-  const cHistoricalData = cryptoData[1];
-  const cTrendingData = cryptoData[2];
-  const currentPrice = cCurrentData ? Object.values(cCurrentData)[0]?.usd : 'none'
-  const pastPrice = cHistoricalData ? Object.values(cHistoricalData)[4]?.market_data?.current_price?.usd : 'none'
-  //const profitRate = (currentPrice - pastPrice) / pastPrice * 100;
+  const [cCurrentData, cHistoricalData, cTrendingData] = Crypto(cName)
+  const currentPrice = parseInt(cCurrentData ? Object.values(cCurrentData)[0]?.usd : 'none')
+  const pastPrice = parseInt(cHistoricalData?.market_data?.current_price?.usd) 
+  const profitRate = (currentPrice - pastPrice) / pastPrice * 100;
   console.log(cCurrentData)
   console.log(cHistoricalData)
   console.log(cTrendingData)
@@ -20,6 +17,7 @@ function App() {
     <h1>{cName}</h1>
     <p>current price: {currentPrice}</p>
     <p>past price: {pastPrice}</p>
+    <p>profit rate: {(profitRate).toFixed(2)}%</p>
   </div>;
 }
 

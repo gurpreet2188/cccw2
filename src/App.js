@@ -3,8 +3,9 @@ import Stocks from './data/stocks';
 
 
 function App() {
-  const stockData = Stocks(`HKD`)
+  const [stockData, histData] = Stocks(`IBM`)
   console.log(stockData)
+  console.log(histData)
 
 
 

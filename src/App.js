@@ -1,12 +1,12 @@
 import './App.css';
-import Crypto from './data/crpyto';
+import Stocks from './data/stocks';
 
 
 function App() {
-  const cryptoData = Crypto()
-  console.log(cryptoData)
+  const stockData = Stocks(`HKD`)
+  console.log(stockData)
 
-  
+
 
   return (
     <div className="App">

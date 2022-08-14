@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Papa from "papaparse"
 
-export default function stocks(stockCode) {
+export default function Stocks(stockCode) {
     const [data, SetData] = useState()
     const [histData, setHisData] = useState()
 

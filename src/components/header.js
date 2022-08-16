@@ -42,7 +42,7 @@ function Header() {
       </div>
 
       <div className='absolute text-white top-[8rem] text-center w-[50vw] left-[25%]'>
-        <p>We Are Stockto, blah blah blah</p>
+        <p className='tracking-[1px] text-[24px]'>We Are Stockto, blah blah blah</p>
       </div>
 
       <div className={`fixed ${nav ? 'NAV-OPEN' : 'NAV-CLOSE'} top-0 right-0 flex flex-col space-y-5 backdrop-blur-sm bg-black/30 p-6 h-screen w-[50vw] transform transition duration-500 ease-in-out text-white lg:hidden`}>

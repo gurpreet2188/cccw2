@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import Header from './components/header';
 import Stocks from './data/stocks';
 
 
@@ -22,7 +23,8 @@ export default function App() {
   // console.log(stockData)
 
   return (
-    <div className="App">
+    <div className="">
+      <Header/>
     </div>
   );
 }

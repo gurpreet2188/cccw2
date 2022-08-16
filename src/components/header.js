@@ -8,8 +8,8 @@ function Header() {
   //     fontFamily: 
   // }
   return (
-    <div className='relative flex flex-row content-center h-40 w-screen bg-hero bg-cover bg-no-repeat'>
-      <div className='flex flex-row justify-between p-4 bg-gradient-to-b from-[rgba(0,0,0,0.5)] w-screen'>
+    <div className='relative flex flex-row content-center h-80 w-screen bg-hero bg-center bg-cover bg-no-repeat'>
+      <div className='flex flex-row justify-between p-4 bg-gradient-to-b from-[rgba(0,0,0,0.7)] w-screen'>
         {/* <StockLogo/> */}
         <Logo width={120} height={60} color1={'#f1f1f1'} color2={"#c1c1c1"} color3={"#f1f1f1"} color4={"#f1f1f1"} />
         <nav x-data="{open : false}" className='z-20 lg:hidden'>
@@ -38,9 +38,11 @@ function Header() {
             }
             `}
           </style>
-        </nav>
+        </nav>    
+      </div>
 
-
+      <div className='absolute text-white top-[8rem] text-center w-[50vw] left-[25%]'>
+        <p>We Are Stockto, blah blah blah</p>
       </div>
 
       <div className={`fixed ${nav ? 'NAV-OPEN' : 'NAV-CLOSE'} top-0 right-0 flex flex-col space-y-5 backdrop-blur-sm bg-black/30 p-6 h-screen w-[50vw] transform transition duration-500 ease-in-out text-white lg:hidden`}>

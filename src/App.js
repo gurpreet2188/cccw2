@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 import Header from './components/header'
+import News from './components/news';
 
 function App() {
   const [data, setData] = useState()
@@ -22,8 +23,9 @@ function App() {
   // }, [])
 
   return (
-    <div className="">
+    <div className="flex flex-col space-y-10 justify-center content-center">
       <Header/>
+      <News/>
     </div>
   );
 }

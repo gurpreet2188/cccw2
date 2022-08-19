@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Papa from "papaparse"
 
-export default function Stocks(dataType, stockCode = 'IBM') {
+export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15' }) {
     const [data, setData] = useState()
     // const [histData, setHisData] = useState()
     // const [news, setNews] = useState()
@@ -26,15 +26,22 @@ export default function Stocks(dataType, stockCode = 'IBM') {
         }
 
         const f = async () => {
-            const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockCode}&interval=5min&apikey=JHCGXCD0QXPF0BEV`)
-            const d = await res.json()
-            setData(d)
+            if (localStorage.stocks === undefined) {
+                const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockCode}&interval=${time}min&apikey=JHCGXCD0QXPF0BEV`)
+                const d = await res.json()
+                setData(d)
+                localStorage.setItem('stocks', JSON.stringify(d))
+                return
+            } else if (localStorage.stocks) {
+                setData(JSON.parse(localStorage.stocks))
+                return
+            }
         }
 
 
         const stocksCSV = async () => {
             // const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=IBM&interval=15min&slice=year1month1&apikey=demo`)
-            Papa.parse(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=${stockCode}&interval=15min&slice=year1month1&apikey=JHCGXCD0QXPF0BEV`, {
+            Papa.parse(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=${stockCode}&interval=${time}min&slice=year1month1&apikey=JHCGXCD0QXPF0BEV`, {
                 download: true,
                 header: true,
                 skipEmptyLines: true,
@@ -47,7 +54,8 @@ export default function Stocks(dataType, stockCode = 'IBM') {
         }
 
         const getNews = async () => {
-            if(localStorage.news === undefined) {
+            // console.log(JSON.parse(localStorage.news), 'news')
+            if (localStorage.news === undefined) {
                 const res = await fetch(`https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=JHCGXCD0QXPF0BEV`)
                 const d = await res.json()
                 setData(d)
@@ -71,9 +79,9 @@ export default function Stocks(dataType, stockCode = 'IBM') {
 
         }
 
-       
 
-        }, [dataType, stockCode])
+
+    }, [dataType, stockCode])
 
     return data
 }

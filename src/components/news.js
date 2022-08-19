@@ -3,7 +3,7 @@ import Carousel from 'nuka-carousel/lib/carousel'
 import Stocks from '../data/stocks'
 
 function News() {
-    const news = Stocks('news')
+    const news = Stocks({dataType : 'news'})
 
     const [filter, setFilter] = useState([{
         'title': 'No News, Market Crashed!!!',
@@ -16,6 +16,7 @@ function News() {
             let temp = []
             if (news?.feed) {
                 news?.feed.map((v, i) => {
+                    console.log('news')
                     if (v.overall_sentiment_label === 'Bullish') {
                         if (temp.length <= 4) { temp.push(v) }
                     }
@@ -31,7 +32,6 @@ function News() {
 
             }
         }
-
         filterNews()
 
     }, [news])

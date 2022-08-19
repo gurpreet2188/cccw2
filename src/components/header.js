@@ -48,6 +48,7 @@ function Header() {
       <div className={`fixed ${nav ? 'NAV-OPEN' : 'NAV-CLOSE'} top-0 right-0 flex flex-col space-y-5 backdrop-blur-sm bg-black/30 p-6 h-screen w-[50vw] transform transition duration-500 ease-in-out text-white lg:hidden`}>
             <p className='mt-16'>My Assest</p>
             <p>Markets</p>
+            <p>Stocks</p>
             <p>News</p>
             <p>Account</p>
             <p>About Us</p>

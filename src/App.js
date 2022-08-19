@@ -3,8 +3,6 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import Header from './components/header'
 import News from './components/news';
-import Charts from './components/charts';
-import Stocks from './data/stocks';
 
 function App() {
   const timeSeries = '30'

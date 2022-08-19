@@ -3,6 +3,8 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import Header from './components/header'
 import News from './components/news';
+import Stocks from './data/stocks';
+import StocksTredning from './data/stocksTredning';
 
 function App() {
   const timeSeries = '30'
@@ -61,6 +63,7 @@ function App() {
     <div className="flex flex-col space-y-10 justify-center content-center">
       <Header/>
       <News/>
+      <StocksTredning/>
       {/* <Charts xAxis={xAxis} vals={stockVal ? stockVal : ''} yMax={0.1} yMin={0.1} /> */}
     </div>
   );

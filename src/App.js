@@ -6,6 +6,8 @@ import News from './components/news';
 import Stocks from './data/stocks';
 import StockPage from './components/stockPage';
 import StockDetailPage from './components/stockDetailPage';
+import NewsPage from './components/newsPage';
+import Contactus from './components/contactus';
 
 function App() {
   const [data, setData] = useState()
@@ -30,7 +32,9 @@ function App() {
       <Header/>
       {/* <News/> */}
       {/* <StockPage/> */}
-      <StockDetailPage/>
+      {/* <StockDetailPage/> */}
+      {/* <NewsPage/> */}
+      <Contactus/>
     </div>
   );
 }

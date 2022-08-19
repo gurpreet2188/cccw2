@@ -5,6 +5,7 @@ import Header from './components/header'
 import News from './components/news';
 import Stocks from './data/stocks';
 import StockPage from './components/stockPage';
+import StockDetailPage from './components/stockDetailPage';
 
 function App() {
   const [data, setData] = useState()
@@ -28,7 +29,8 @@ function App() {
     <div className="flex flex-col space-y-10 justify-center content-center">
       <Header/>
       {/* <News/> */}
-      <StockPage/>
+      {/* <StockPage/> */}
+      <StockDetailPage/>
     </div>
   );
 }

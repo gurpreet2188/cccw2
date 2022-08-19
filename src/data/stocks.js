@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Papa from "papaparse"
 
-export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15' }) {
+export default function Stocks({ dataType = '', stockCode = [], time = '15' }) {
     const [data, setData] = useState()
     // const [histData, setHisData] = useState()
     // const [news, setNews] = useState()
@@ -25,7 +25,14 @@ export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15'
 
         const f = async () => {
             if (localStorage.stocks === undefined) {
-                const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockCode}&interval=${time}min&apikey=${process.env.REACT_APP_AV}`)
+                // const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockCode}&interval=${time}min&apikey=${process.env.REACT_APP_AV}`)
+                const res = await fetch(`https://alpha-vantage.p.rapidapi.com/query?function=TIME_SERIES_INTRADAY&symbol=${stockCode}&interval=${time}min&datatype=json&output_size=compact`, {
+                    headers: {
+                        'X-RapidAPI-Key': `${process.env.REACT_APP_RGF}`,
+                        'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com'
+                    }
+                })
+
                 const d = await res.json()
                 setData(d)
                 localStorage.setItem('stocks', JSON.stringify(d))
@@ -34,6 +41,49 @@ export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15'
                 setData(JSON.parse(localStorage.stocks))
                 return
             }
+        }
+
+        const graphData = async () => {
+            if (localStorage.trendingStockVals) {
+                setData(JSON.parse(localStorage.trendingStockVals))
+            } else {
+                let urls = []
+                // const u = `https://apistocks.p.rapidapi.com/intraday?symbol=${stockCode}&interval=${time}min&maxreturn=100`
+                stockCode.map((v) => {
+                    urls.push(`https://apistocks.p.rapidapi.com/intraday?symbol=${v}&interval=${time}min&maxreturn=100`)
+                })
+                Promise.all(urls.map((v) => {
+                    return fetch(v, {
+                        headers: {
+                            'X-RapidAPI-Key': `${process.env.REACT_APP_RGF}`,
+                            'X-RapidAPI-Host': 'apistocks.p.rapidapi.com'
+                        }
+                    }).then((r) => {
+                        return r.json()
+                    }).then((data) => {
+                        return data
+                    })
+                })).then((val) => {
+                    setData(val)
+                    localStorage.setItem('trendingStockVals', JSON.stringify(val))
+
+                }).catch(console.error.bind(console))
+            }
+            // if (localStorage.graph === undefined) {
+            //     const res = await fetch(`https://apistocks.p.rapidapi.com/intraday?symbol=${stockCode}&interval=${time}min&maxreturn=100`, {
+            //         headers: {
+            //             'X-RapidAPI-Key': `${process.env.REACT_APP_RGF}`,
+            //             'X-RapidAPI-Host': 'apistocks.p.rapidapi.com'
+            //         }
+            //     })
+            //     const d = await res.json()
+            //     setData(d)
+            //     localStorage.setItem('graph', JSON.stringify(d))
+            //     return
+            // } else if (localStorage.graph) {
+            //     setData(JSON.parse(localStorage.graph))
+            //     return
+            // }
         }
 
 
@@ -75,11 +125,13 @@ export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15'
             // let temp = getNews()
             // setData(asyncLoc.setItem('news', temp).then(() => { return asyncLoc.getItem('news') }))
 
+        } else if (dataType === 'graph') {
+            graphData()
         }
 
 
 
-    }, [dataType, stockCode])
+    }, [])
 
     return data
 }

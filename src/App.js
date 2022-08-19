@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Header from './components/header'
 import News from './components/news';
 import Stocks from './data/stocks';
-import StocksTredning from './data/stocksTredning';
+import StocksTredning from './components/stocksTredning';
 
 function App() {
   const timeSeries = '30'

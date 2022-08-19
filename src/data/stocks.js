@@ -7,8 +7,6 @@ export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15'
     // const [news, setNews] = useState()
 
     useEffect(() => {
-        //https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=IBM&interval=15min&slice=year1month1&apikey=demo
-        //https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockCode}&interval=5min&apikey=JHCGXCD0QXPF0BEV
 
         const asyncLoc = {
             setItem: (k, v) => {
@@ -27,7 +25,7 @@ export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15'
 
         const f = async () => {
             if (localStorage.stocks === undefined) {
-                const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockCode}&interval=${time}min&apikey=JHCGXCD0QXPF0BEV`)
+                const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockCode}&interval=${time}min&apikey=${process.env.REACT_APP_AV}`)
                 const d = await res.json()
                 setData(d)
                 localStorage.setItem('stocks', JSON.stringify(d))
@@ -41,7 +39,7 @@ export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15'
 
         const stocksCSV = async () => {
             // const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=IBM&interval=15min&slice=year1month1&apikey=demo`)
-            Papa.parse(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=${stockCode}&interval=${time}min&slice=year1month1&apikey=JHCGXCD0QXPF0BEV`, {
+            Papa.parse(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=${stockCode}&interval=${time}min&slice=year1month1&apikey=${process.env.REACT_APP_AV}`, {
                 download: true,
                 header: true,
                 skipEmptyLines: true,
@@ -56,7 +54,7 @@ export default function Stocks({ dataType = '', stockCode = 'GOOGL', time = '15'
         const getNews = async () => {
             // console.log(JSON.parse(localStorage.news), 'news')
             if (localStorage.news === undefined) {
-                const res = await fetch(`https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=JHCGXCD0QXPF0BEV`)
+                const res = await fetch(`https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=${process.env.REACT_APP_AV}`)
                 const d = await res.json()
                 setData(d)
                 localStorage.setItem('news', JSON.stringify(d))

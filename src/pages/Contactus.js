@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Contactus() {
+function ContactUs() {
   return (
     <div class="contactme">
         
@@ -8,4 +8,4 @@ function Contactus() {
   )
 }
 
-export default Contactus
+export default ContactUs

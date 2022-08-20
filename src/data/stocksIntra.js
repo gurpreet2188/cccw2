@@ -1,7 +1,7 @@
-function stocksIntra(stockCode, time) {
-    let data
+function stocksIntra(stockCode, time, setData) {
+    // let data
     if (localStorage.trendingStockVals) {
-        data = JSON.parse(localStorage.trendingStockVals)
+        setData(JSON.parse(localStorage.trendingStockVals))
     } else {
         let urls = []
         stockCode.map((v) => {
@@ -19,12 +19,12 @@ function stocksIntra(stockCode, time) {
                 return data
             })
         })).then((val) => {
-            data = val
+            setData(val)
             localStorage.setItem('trendingStockVals', JSON.stringify(val))
 
         }).catch(console.error.bind(console))
     }
-    return data
+    return
 }
 
 export default stocksIntra

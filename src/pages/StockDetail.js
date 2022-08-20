@@ -1,6 +1,6 @@
 import React from 'react'
 
-function StockDetailPage() {
+function StockDetail() {
     return (
         <div class="hero flex space-y-2 flex-col">
             {/* <p style={{color:'red',background:'blue'}}>Test</p> */}
@@ -53,4 +53,4 @@ function StockDetailPage() {
     )
 }
 
-export default StockDetailPage
+export default StockDetail

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function StockPage() {
+function Stocks() {
   return (
     <div class="stockFeatures">
       {/* Buttons */}
@@ -117,4 +117,4 @@ function StockPage() {
   )
 }
 
-export default StockPage
+export default Stocks

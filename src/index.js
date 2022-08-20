@@ -1,15 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './pages/Layout';
+import Home from './pages/Home';
+import NewsPage from './pages/News';
+import ContactUs from './pages/Contactus';
+import AboutUS from './pages/AboutUS';
+import Crypto from './pages/Crypto';
+import Stocks from './pages/Stocks';
 // import '../fonts/CaptureIT/capture_it.ttf'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Layout/>}>
+        <Route index element={<Home/>} />
+        <Route path="crypto" element={<Crypto/>} />
+        <Route path="news" element={<NewsPage/>} />
+        <Route path="stocks" element={<Stocks/>} />
+        <Route path="contact-us" element={<ContactUs/>} />
+        <Route path="about-us" element={<AboutUS/>} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

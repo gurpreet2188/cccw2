@@ -1,12 +1,13 @@
 import React from 'react'
+import NewsCarousel from '../components/NewsCarousel'
 
-function NewsPage() {
+function News() {
   return (
     // Main Section
     <div class="hero                                        ">
         <h1>Trending News</h1>
         <div class="Tnews">
-            -Carousel-
+           <NewsCarousel/>
         </div>
         <h1>News</h1>
         <div class="NewStories flex space-y-2 flex-col">
@@ -23,4 +24,4 @@ function NewsPage() {
   )
 }
 
-export default NewsPage
+export default News

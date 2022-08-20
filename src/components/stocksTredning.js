@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Stocks from '../data/stocks'
 import stocksIntra from '../data/stocksIntra'
+import stocksTrending from '../data/stocksTrending'
 import Charts from './charts'
 
 function StocksTredning() {
@@ -11,9 +12,9 @@ function StocksTredning() {
     const [xAxis, setXAxis] = useState([])
     const [symbols, setSymbols] = useState([])
     const [shortlist, setShortList] = useState()
-
-    const size = 100 // console.log(graph?.Results[0])
-
+    
+    const size = 35 // console.log(graph?.Results[0])
+    
     useEffect (()=>{
       
             if (data?.length > 0) {
@@ -46,22 +47,19 @@ function StocksTredning() {
 
         if (tredning?.items) {
             const temp = tredning.items.slice(0, 10)
-            console.log(temp[0].info.ticker_symbols[0])
+            // console.log(temp[0].info.ticker_symbols[0])
             temp.map((v,i)=>{
                 setSymbols(symbols => [...symbols, v.info.ticker_symbols[0]])
             })
-           
         }
 
     }, [tredning])
 
     useEffect(()=>{
         if(symbols.length > 0) {
-            setData(stocksIntra(symbols, '30'))
+            stocksIntra(symbols, '30', setData)
         }
     },[symbols])
-
-    console.log(data)
 
     useEffect(() => {
         let t = []
@@ -70,39 +68,16 @@ function StocksTredning() {
             t.push(c)
         }
         setFinalVals(t)
-        // console.log(t, 'test')
     }, [shortlist, vals])
-    console.log('test', vals)
+    // console.log('test', vals)
 
+    useEffect(()=>{
+        stocksTrending(setTrending)
+    },[])
 
-
-
-    useEffect(() => {
-        const f = async () => {
-            const res = await fetch('https://google-finance4.p.rapidapi.com/market-trends/?t=most-active&hl=en&gl=us', {
-                headers: {
-                    'X-RapidAPI-Key': `${process.env.REACT_APP_RGF}`,
-                    'X-RapidAPI-Host': 'google-finance4.p.rapidapi.com'
-                }
-            })
-
-            const d = await res.json()
-            localStorage.setItem('stockTredning', JSON.stringify(d))
-            setTrending(d)
-            // console.log(d)
-        }
-        if (localStorage.stockTredning) {
-            setTrending(JSON.parse(localStorage.stockTredning))
-        } else {
-            f()
-        }
-        // f()
-    }, [])
-    // console.log(tredning?.items[0])
     return (
 
-        <div className='flex flex-col p-2 overflow-x-scroll'>
-            {/* <Charts xAxis={xAxis} vals={vals ? vals : ''} yMax={0.05} yMin={0.05} w={100} h={100} type='compact' /> */}
+        <div className='flex flex-col p-2'>
             <h2>Stocks - Tredning</h2>
             <div className=''>
                 <table>
@@ -114,7 +89,7 @@ function StocksTredning() {
                         </th>
                         <th scope='col' className='p-4'>
                             <tr>
-                                Current Value
+                                Value(USD)
                             </tr>
                         </th>
                         <th scope='col' className='p-4'>
@@ -125,20 +100,20 @@ function StocksTredning() {
                     </thead>
                     <tbody className=''>
                         {tredning ? tredning?.items.slice(0, 10).map((v, i) => {
-                            // const graph = Stocks({ dataType: 'graph', time: '30', stockCode: "NVDA" })
-                            // graphsSVG()
 
                             return (
                                 <tr key={i} className="text-[13px] w-[10px] p-8" >
-                                    <td className='text-left p-4 border-b-[0.5px]'>
+                                    <td className='text-left border-b-[0.5px]'>
                                         {v.info.title}
                                     </td>
                                     <td className='text-center border-b-[0.5px]'>
-                                        {v.price.last.value}
+                                        ${v.price.last.value}
                                     </td>
                                     <td className=''>
+                                        <div className='flex flex-row justify-center content-center'>
+                                            <Charts xAxis={xAxis} vals={finalVals ? finalVals[i] : ''} yMax={0.05} yMin={0.05} w={size} h={35} type='compact' />
 
-                                        <Charts xAxis={xAxis} vals={finalVals ? finalVals[i] : ''} yMax={0.05} yMin={0.05} w={size} h={size} type='compact' />
+                                        </div>
                                     </td>
                                 </tr>
                             )

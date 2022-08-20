@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 function Charts({ xAxis, vals, yMax, yMin, w, h, type}) {
-    console.log(vals, 'test')
+    // console.log(vals, 'test')
     const [yAxis, setYAxis] = useState([])
     const [yLeg, setYLeg] = useState({ 'max': 0, 'min': 0 })
 
@@ -16,15 +16,15 @@ function Charts({ xAxis, vals, yMax, yMin, w, h, type}) {
                     const diff = yLeg.max - yLeg.min
                     const diffV = yLeg.max - v
                     const deltaY = diff - diffV
-                    console.log(diff - diffV)
+                    // console.log(diff - diffV)
                     setYAxis(yAxis => [...yAxis, [xAxis[i], parseInt((w - (w * ((deltaY / diff) * 100) / 100)))]])
                 })
             }
         }
-        console.log(vals)
+        // console.log(vals)
     }, [vals, xAxis, yMax, yMin])
 
-    console.log(yAxis, vals)
+    // console.log(yAxis, vals)
     return (
         <div className=''>
             <svg width={w} height={h}>

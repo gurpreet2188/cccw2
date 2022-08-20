@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Stocks from '../data/stocks'
 import stocksIntra from '../data/stocksIntra'
 import stocksTrending from '../data/stocksTrending'
 import Charts from './charts'
@@ -12,19 +11,19 @@ function StocksTredning() {
     const [xAxis, setXAxis] = useState([])
     const [symbols, setSymbols] = useState([])
     const [shortlist, setShortList] = useState()
-    
+
     const size = 35 // console.log(graph?.Results[0])
-    
-    useEffect (()=>{
-      
+    useEffect(() => {
+        let check = true
+        if (check) {
             if (data?.length > 0) {
                 // console.log(data, 'test')
-                data?.map((v,i)=>{
+                data?.map((v) => {
                     // console.log(v.Results, 'test')
                     //get unix date
                     const lastUnixDate = Date.parse(v?.Results[v?.Results?.length - 1].Date.split(' ')[0])
                     //filter through 
-                    const filteredData = v?.Results.filter(f => Date.parse(f?.Date.split(' ')[0] ) === lastUnixDate) 
+                    const filteredData = v?.Results.filter(f => Date.parse(f?.Date.split(' ')[0]) === lastUnixDate)
                     // console.log(filteredData, 'test')
                     //set short listed
                     setShortList(filteredData)
@@ -32,48 +31,84 @@ function StocksTredning() {
                     const baseNum = size / filteredData.length
                     // console.log(baseNum, 'test')
                     //set vals
-                    if(shortlist === undefined) {
-                        filteredData.map((fv, fi) =>{
+                    if (vals.length === 0) {
+                        filteredData.map((fv, fi) => {
                             setVals(vals => [...vals, parseFloat(fv?.High)])
                             setXAxis(xAxis => [...xAxis, (baseNum * fi)])
                         })
                     }
                 })
             }
-      
-    },[data])
+        }
+
+        return () => {
+            check = false
+        }
+
+    }, [data])
 
     useEffect(() => {
+        let check = true
+        if (check) {
+            if (tredning?.items) {
+                const temp = tredning.items.slice(0, 10)
+                // console.log(temp[0].info.ticker_symbols[0])
+                temp.map((v) => {
+                    setSymbols(symbols => [...symbols, v.info.ticker_symbols[0]])
+                })
+            }
+        }
 
-        if (tredning?.items) {
-            const temp = tredning.items.slice(0, 10)
-            // console.log(temp[0].info.ticker_symbols[0])
-            temp.map((v,i)=>{
-                setSymbols(symbols => [...symbols, v.info.ticker_symbols[0]])
-            })
+
+        return () => {
+            check = false
         }
 
     }, [tredning])
 
-    useEffect(()=>{
-        if(symbols.length > 0) {
-            stocksIntra(symbols, '30', setData)
+    useEffect(() => {
+        let check = true
+        if (check) {
+            if (symbols.length > 0) {
+                stocksIntra(symbols, '30', setData)
+            }
         }
-    },[symbols])
+
+
+        return () => {
+            check = false
+        }
+    }, [symbols])
 
     useEffect(() => {
         let t = []
-        for (let i = 0; i < vals.length; i += shortlist.length) {
-            const c = vals.slice(i, i + shortlist.length)
-            t.push(c)
+        let check = true
+        if (check) {
+            if (finalVals.length === 0) {
+                for (let i = 0; i < vals.length; i += shortlist.length) {
+                    const c = vals.slice(i, i + shortlist.length)
+                    t.push(c)
+                }
+                setFinalVals(t)
+                console.log('test vals')
+            }
         }
-        setFinalVals(t)
-    }, [shortlist, vals])
-    // console.log('test', vals)
+        return () => {
+            check = false
+        }
+    }, [vals])
+    
 
-    useEffect(()=>{
-        stocksTrending(setTrending)
-    },[])
+
+    useEffect(() => {
+        let check = true
+        if (check) {
+            stocksTrending(setTrending)
+        }
+        return () => {
+            check = false
+        }
+    }, [])
 
     return (
 

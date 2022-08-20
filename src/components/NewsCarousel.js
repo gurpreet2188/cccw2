@@ -19,6 +19,7 @@ function NewsCarousel() {
 
 
     useEffect(() => {
+        let check = true
         const filterNews = () => {
             let temp = []
             if (news?.feed) {
@@ -39,7 +40,13 @@ function NewsCarousel() {
 
             }
         }
-        filterNews()
+        if (check) {
+            filterNews()
+
+        }
+        return () => {
+            check = false
+        }
 
     }, [news])
 
@@ -59,15 +66,15 @@ function NewsCarousel() {
                 pagingDotsContainerClassName: 'C-DOTS',
                 pagingDotsStyle: {
                     fill: winSize() ? 'white' : 'black',
-                    
+
 
                 }
             }}>
                 {filter ? filter?.map((v, i) => {
                     if (i <= 4) {
                         return (
-                            <div>
-                                <div key={i} className=" mb-8 h-60 bg-cover bg-no-repeat bg-center rounded-md overflow-hidden md:hidden block" style={{ backgroundImage: `url(${v.banner_image})` }}>
+                            <div key={i}>
+                                <div  className=" mb-8 h-60 bg-cover bg-no-repeat bg-center rounded-md overflow-hidden md:hidden block" style={{ backgroundImage: `url(${v.banner_image})` }}>
                                     <div className='flex flex-col justify-end  bg-no-repeat bg-gradient-to-b to-[rgba(0,0,0,0.5)] from-white/0 w-[100%] h-[100%] p-2'>
                                         <a href={v.url} target='_blank' className={`C-LINECLAMP text-sm text-white text-left font-bold py-1 `}>{v.title}...</a>
                                     </div>
@@ -82,7 +89,7 @@ function NewsCarousel() {
                                             <a href={v.url} target='_blank' className='justify-self-end self-end text-red-400'>Continue Reading...</a>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                             </div>
 
 

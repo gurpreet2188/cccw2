@@ -51,7 +51,7 @@ function StocksTredning() {
         let check = true
         if (check) {
             if (tredning?.items) {
-                const temp = tredning.items.slice(0, 10)
+                const temp = tredning.items.slice(0, 7)
                 // console.log(temp[0].info.ticker_symbols[0])
                 temp.map((v) => {
                     setSymbols(symbols => [...symbols, v.info.ticker_symbols[0]])
@@ -97,7 +97,7 @@ function StocksTredning() {
             check = false
         }
     }, [vals])
-    
+
 
 
     useEffect(() => {
@@ -112,36 +112,64 @@ function StocksTredning() {
 
     return (
 
-        <div className='flex flex-col p-2'>
-            <h2>Stocks - Tredning</h2>
-            <div className=''>
-                <table>
-                    <thead className='text-center'>
-                        <th scope='col' className='p-4'>
+        <div className='flex flex-col p-2 md:w-[50%] w-[100%] self-center space-y-2'>
+            <h2>Stocks</h2>
+            <div className='flex flex-col justify-center content-center w-[100%] rounded-md border border-black/10'>
+                <ul className='flex flex-col space-y-6 w-[100%]'>
+                    <li className='flex flex-row justify-start content-center items-center  p-4 min-h-[4rem] bg-slate-50'>
+                        <div className='basis-[60%]'>Name</div>
+                        <div className='basis-[15%] ml-auto text-right'>Value</div>
+                        <div className='basis-[15%] ml-auto text-right'>Tracking</div>
+                    </li>
+
+                    <div className='flex flex-col space-y-3'>
+
+                        {tredning ? tredning?.items.slice(0, 7).map((v, i) => {
+
+                            return (
+                                <li key={i} className='flex flex-row justify-center content-center p-4 h-[4rem] bg-slate-50'>
+                                    <div className='basis-[60%] text-sm md:text-[16px] m-auto ml-0'>{v.info.title}</div>
+                                    <div className='basis-[15%] m-auto text-sm md:text-[16px] text-right'>${v.price.last.value}</div>
+                                    <div className='basis-[15%] ml-auto'>
+                                        <Charts xAxis={xAxis} vals={finalVals ? finalVals[i] : ''} yMax={0.05} yMin={0.05} w={size} h={35} type='compact' />
+                                    </div>
+                                </li>
+
+
+
+                            )
+                        }) : 'Loading'}
+                    </div>
+
+                </ul>
+
+                {/* <table className='w-[100%] rounded-lg'>
+                    <thead className='text-left bg-slate-300 rounded-lg shadow-md'>
+                        <th scope='col' className='py-4 pr-4 pl-1 rounded-tr-none rounded-br-none rounded-bl-none rounded-lg'>
                             <tr>
                                 Name
                             </tr>
                         </th>
-                        <th scope='col' className='p-4'>
+                        <th scope='col' className='py-4 pr-4 pl-1 '>
                             <tr>
                                 Value(USD)
                             </tr>
                         </th>
-                        <th scope='col' className='p-4'>
+                        <th scope='col' className='py-4 pr-4 pl-1 rounded-lg rounded-tl-none rounded-br-none rounded-bl-none'>
                             <tr>
                                 Chart
                             </tr>
                         </th>
                     </thead>
                     <tbody className=''>
-                        {tredning ? tredning?.items.slice(0, 10).map((v, i) => {
+                        {tredning ? tredning?.items.slice(0, 7).map((v, i) => {
 
                             return (
-                                <tr key={i} className="text-[13px] w-[10px] p-8" >
-                                    <td className='text-left border-b-[0.5px]'>
+                                <tr key={i} className="text-[13px] w-[10px] shadow-md rounded-lg" >
+                                    <td className='text-left py-6 pl-1 pr-4 h-12'>
                                         {v.info.title}
                                     </td>
-                                    <td className='text-center border-b-[0.5px]'>
+                                    <td className='text-left '>
                                         ${v.price.last.value}
                                     </td>
                                     <td className=''>
@@ -155,7 +183,7 @@ function StocksTredning() {
                         }) : 'Loading'}
 
                     </tbody>
-                </table>
+                </table> */}
             </div>
         </div>
     )

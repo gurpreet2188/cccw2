@@ -18,18 +18,20 @@ root.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Layout/>}>
-        <Route index element={<Home/>} />
-        <Route path="crypto" element={<Crypto/>} />
-        <Route path="news" element={<NewsPage/>} />
-        <Route path="stocks" element={<Stocks/>} />
-        <Route path="contact-us" element={<ContactUs/>} />
-        <Route path="about-us" element={<AboutUS/>} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="crypto" element={<Crypto />} />
+          <Route path="news" element={<NewsPage />} />
+          <Route path="stocks" element={<Stocks />} />
+          <Route path="contact-us" element={<ContactUs />} />
+          <Route path="about-us" element={<AboutUS />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

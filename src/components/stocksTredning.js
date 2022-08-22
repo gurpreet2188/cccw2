@@ -116,7 +116,7 @@ function StocksTredning() {
             <h2>Stocks</h2>
             <div className='flex flex-col justify-center content-center w-[100%] rounded-md border border-black/10'>
                 <ul className='flex flex-col space-y-6 w-[100%]'>
-                    <li className='flex flex-row justify-start content-center items-center  p-4 min-h-[4rem] bg-slate-50'>
+                    <li className='flex flex-row justify-start content-center items-center  p-4 h-[4rem] bg-slate-50'>
                         <div className='basis-[60%]'>Name</div>
                         <div className='basis-[15%] ml-auto text-right'>Value</div>
                         <div className='basis-[15%] ml-auto text-right'>Tracking</div>

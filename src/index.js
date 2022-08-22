@@ -25,7 +25,7 @@ root.render(
           <Route index element={<Home />} />
           <Route path="crypto" element={<Crypto />} />
           <Route path="news" element={<NewsPage />} />
-          <Route path="stocks" element={<Stocks />} />
+          <Route path="stocks/:id" element={<Stocks />} />
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="about-us" element={<AboutUS />} />
         </Route>

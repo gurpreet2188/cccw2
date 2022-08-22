@@ -8,12 +8,12 @@ function stocksTrending(setTrending) {
         })
 
         const d = await res.json()
-        localStorage.setItem('stockTredning', JSON.stringify(d))
+        localStorage.setItem('stockTrending', JSON.stringify(d))
         setTrending(d)
         // console.log(d)
     }
     if (localStorage.stockTredning) {
-        setTrending(JSON.parse(localStorage.stockTredning))
+        setTrending(JSON.parse(localStorage.stockTrending))
     } else {
         f()
     }

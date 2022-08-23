@@ -7,6 +7,7 @@ function Crypto() {
   const [data, setData] = useState()
   const [header, setHeader] = useState()
   const [pageNum, setPageNum] = useState(1)
+  const [detailURL, setDetailURL] = useState()
   const [primaryList, setPrimaryList] = useState()
   const [primaryListEntries, setPrimaryListEntries] = useState()
   const currentURL = useLocation()
@@ -48,6 +49,7 @@ function Crypto() {
     let check = true
     if (check) {
       if (data) {
+        setDetailURL(()=> (v)=> '/crypto-detail/'+ v?.id)
         setHeader(['Name', 'Symbol', 'Price', 'Change(24h)', 'Change_%(24h)', 'High(24h)', 'Market Cap', 'Rank(Market Cap)',])
         setPrimaryListEntries([
           (v,i) => v?.name,
@@ -60,6 +62,7 @@ function Crypto() {
           (v,i) => v?.market_cap_rank,
         ])
         setPrimaryList(data)
+
       }
     }
 
@@ -77,7 +80,7 @@ function Crypto() {
     //   })
     // })
     // header.map(v => console.log(v))
-    return (<ListCommon HeaderData={header} PrimaryListData={primaryList} PrimaryListDataEntries={primaryListEntries} />)
+    return (<ListCommon HeaderData={header} PrimaryListData={primaryList} PrimaryListDataEntries={primaryListEntries} urlType={detailURL}/>)
   }
 
   return (

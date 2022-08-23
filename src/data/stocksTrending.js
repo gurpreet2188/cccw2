@@ -12,7 +12,7 @@ function stocksTrending(setTrending) {
         setTrending(d)
         // console.log(d)
     }
-    if (localStorage.stockTredning) {
+    if (localStorage.stockTrending) {
         setTrending(JSON.parse(localStorage.stockTrending))
     } else {
         f()

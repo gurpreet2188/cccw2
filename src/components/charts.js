@@ -12,18 +12,20 @@ function Charts({ xAxis, vals, yMax, yMin, w, h, type}) {
             const minVal = Math.min(...vals)
             yLeg.max = maxVal + (maxVal * yMax)
             yLeg.min = minVal - (minVal * yMin)
-            if (yAxis.length === 0) {
+            let xy = []
+            // if (yAxis.length === 0) {
                 vals.map((v, i) => {
                     const diff = yLeg.max - yLeg.min
                     const diffV = yLeg.max - v
                     const deltaY = diff - diffV
                     // console.log(diff - diffV)
-                    setYAxis(yAxis => [...yAxis, [xAxis[i], parseInt((w - (w * ((deltaY / diff) * 100) / 100)))]])
+                    xy = [...xy, [xAxis[i], parseInt((w - (w * ((deltaY / diff) * 100) / 100)))]]
                 })
-            }
+                setYAxis(xy)
+            // }
             vals[0] > vals[vals.length - 1] ? setColor('#FF0000') : setColor(color)
         }
-        // console.log(vals)
+        console.log(vals, 'chart')
     }, [vals, xAxis, yMax, yMin])
 
 

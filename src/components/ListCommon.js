@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Charts from './charts'
 
-function ListCommon({ HeaderData = [], PrimaryListData = [], PrimaryListDataEntries = [] }) {
+function ListCommon({ HeaderData = [], PrimaryListData = [], PrimaryListDataEntries = [], charts = {}, urlType }) {
   const [flexBasis, setFlexBasis] = useState(0)
+  console.log(PrimaryListDataEntries.length)
   useEffect(() => {
     let check = true
     if (check) {
@@ -14,38 +17,58 @@ function ListCommon({ HeaderData = [], PrimaryListData = [], PrimaryListDataEntr
     }
   }, [HeaderData])
 
-  // console.log(flexBasis)
+  console.log(charts, 'test')
 
+  const chartsLines = (mI) => {
+    console.log(charts?.xAxis[mI])
+    return (
+      <div className='basis-[15%] ml-auto'>
+        <Charts xAxis={charts?.xAxis[mI]} vals={charts?.vals[mI]} yMax={0.05} yMin={0.05} w={30} h={35} type='compact' />
+      </div>
 
+    )
+  }
 
   return (
     <div className='p-2'>
-      <div className='w-[100%] border border-black/10 rounded-md'>
-        <ul className='flex flex-col space-y-4 w-[100%]'>
+      <div className='w-[100%] rounded-md overflow-auto'>
+        <ul className='flex flex-col space-y-4 w-fit overflow-scroll'>
           <li className='flex flex-row items-center bg-slate-100 p-2 h-[4rem] w-[100%]'>
-            {HeaderData.length > 0 ? HeaderData.map((v, i) => {
+            {HeaderData.map((v, i) => {
               return (
-                <div key={i} style={{ flexBasis: flexBasis + '%', padding: '4px', textAlign: i !== 0 ? 'right' : 'left' }}>{v}</div>
+                <div key={i} style={{
+                  flexBasis: flexBasis + '%', padding: '4px', textAlign: i !== 0 ? 'right' : 'left',
+                  whiteSpace: i === 0 ? 'nowrap' : '', textOverflow: i === 0 ? 'ellipsis' : '', overFlow: i === 0 ? 'hidden' : ''
+                }} >{v}</div>
               )
-            }) : 'Loadind..'}
+            })}
           </li>
           <div>
 
-            <div className='flex flex-col space-y-2'>
-              {PrimaryListData.length > 0 ? PrimaryListData.map((mV, mI) => {
+            <div className='flex flex-col space-y-2 w-[100%]'>
+              {PrimaryListData.map((mV, mI) => {
+                // console.log(urlType ? urlType(mV): '', 'Link')
                 return (
-                  <li key={mI} className='flex flex-row items-center space-y-4 h-[6rem] bg-slate-50 p-4'>
+                    <Link key={mI} to={urlType ? urlType(mV): '/'}>
+                    <li  className='flex flex-row items-center space-y-4 h-fit bg-slate-50 p-4 w-[100%] '>
+                   
                     {/* <div> */}
-                    {PrimaryListDataEntries.length > 0 ? PrimaryListDataEntries.map((v, i) => {
+                    {PrimaryListDataEntries.map((v, i) => {
                       // {console.log(v)}
                       return (
-                        <p key={i} style={{ flexBasis: flexBasis + '%', padding: '4px', textAlign: i !== 0 ? 'right' : 'left' }}>{v(mV)}</p>
+                        <p key={i} style={{
+                          flexBasis: flexBasis + '%', padding: '4px', textAlign: i !== 0 ? 'right' : 'left',
+                          whiteSpace: i === 0 ? 'nowrap' : '', textOverflow: i === 0 ? 'ellipsis' : '', overFlow: i === 0 ? 'hidden' : ''
+                        }} className='overflow-hidden'>{v(mV, i)}</p>
+
                       )
-                    }) : 'Loading....'}
+                    })}
+                    {charts?.xAxis ? chartsLines(mI): ''}
                     {/* </div> */}
                   </li>
+                    </Link>
                 )
-              }) : 'Loading...'}
+              })}
             </div>
           </div>
         </ul>

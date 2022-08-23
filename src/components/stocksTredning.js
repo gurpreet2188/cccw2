@@ -23,8 +23,11 @@ function StocksTredning() {
                     //get unix date
                     const lastUnixDate = Date.parse(v?.Results[v?.Results?.length - 1].Date.split(' ')[0])
                     //filter through 
-                    const filteredData = v?.Results.filter(f => Date.parse(f?.Date.split(' ')[0]) === lastUnixDate)
-                    // console.log(filteredData, 'test')
+                    let filteredData = v?.Results.filter(f => Date.parse(f?.Date.split(' ')[0]) === lastUnixDate)
+                    if (filteredData.length < 3) {
+                        filteredData = v?.Results.slice( -11)
+                    }
+                    console.log(filteredData, 'test')
                     //set short listed
                     setShortList(filteredData)
                     // baseNum
@@ -90,14 +93,14 @@ function StocksTredning() {
                     t.push(c)
                 }
                 setFinalVals(t)
-                console.log('test vals')
             }
         }
         return () => {
             check = false
         }
     }, [vals])
-
+    
+    // console.log('test', shortlist.length)
 
 
     useEffect(() => {

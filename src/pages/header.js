@@ -49,7 +49,7 @@ function Header() {
         <nav className='hidden md:block'>
           <div className='flex flex-row text-white space-x-5 p-4 rounded-md backdrop-blur-sm bg-black/30'>
             {/* <Link className='' to='/myassest'>My Assest</Link> */}
-            <Link to='/crypto' >Crypto</Link>
+            <Link to='/crypto/1' >Crypto</Link>
             <Link to='/stocks/1' >Stocks</Link>
             <Link to='/news'>News</Link>
             {/* <Link to='/account'>Account</Link> */}

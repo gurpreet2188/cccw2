@@ -11,6 +11,7 @@ import ContactUs from './pages/Contactus';
 import AboutUS from './pages/AboutUS';
 import Crypto from './pages/Crypto';
 import Stocks from './pages/Stocks';
+import StockDetail from './pages/StockDetail';
 // import '../fonts/CaptureIT/capture_it.ttf'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,9 +24,10 @@ root.render(
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="crypto" element={<Crypto />} />
+          <Route path="crypto/:id" element={<Crypto />} />
           <Route path="news" element={<NewsPage />} />
           <Route path="stocks/:id" element={<Stocks />} />
+          <Route path="stocks-detail/:id" element={<StockDetail/>} />
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="about-us" element={<AboutUS />} />
         </Route>

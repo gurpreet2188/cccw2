@@ -1,4 +1,5 @@
 import React from 'react'
+import ContactUs from './Contactus'
 
 
 function AboutUS() {
@@ -44,7 +45,7 @@ function AboutUS() {
 
       </div>
 
-      
+      <ContactUs />
     </div>
   )
 }

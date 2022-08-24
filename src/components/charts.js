@@ -34,12 +34,12 @@ function Charts({ xAxis, xAxisLeg, vals, yMax, yMin, w, h, type }) {
     return (
         <svg width={w} height={h} className='m-auto'>
             <g style={{ visibility: type === 'compact' ? 'hidden' : '' }}>
-                <g style={{ stroke: '#000' }}>
+                <g style={{ stroke: '#000' }} className='block md:hidden'>
                     <line x1="0" x2="0" y1="0" y2={h}>
 
                     </line>
                 </g>
-                <g style={{ stroke: '#000' }}>
+                <g style={{ stroke: '#000' }} className='block md:hidden'>
                     <line x1="0" x2={w} y1={h} y2={h}></line>
                 </g>
 
@@ -52,7 +52,7 @@ function Charts({ xAxis, xAxisLeg, vals, yMax, yMin, w, h, type }) {
             />
 
             <g style={{ visibility: type === 'compact' ? 'hidden' : '' }}>
-                <text x='10' y='10'>{parseInt(yLeg.max)}</text>
+                <text x='10' y='12'>{parseInt(yLeg.max)}</text>
                 <text x='10' y={h / 2}>{parseInt(((yLeg.max - yLeg.min) / 2) + yLeg.min)}</text>
                 <text x='10' y={h - 10}>{parseInt(yLeg.min)}</text>
             </g>

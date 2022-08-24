@@ -11,6 +11,13 @@ function AboutUS() {
             <div class="flex flex-col space-y-8 justify-between">
               <div>
                   <h2 class="font-bold text-4xl tracking-wide">About Us</h2>
+                  <p class="pt-2 text-cyan-100 text-md">Mission Statements</p>
+                  <p class="pt-2 text-cyan-100 text-md">STOCKTO provides an overall asset management service</p>
+                  <p class="pt-2 text-cyan-100 text-md">Our company aims to contribute to society through advanced asset design and
+aims to realize the value of respect for the private sector with autonomy and
+mutual consideration. The company provides information for the management of
+individual assets. It also focuses on improving the safety of society and
+sustainable mutual development</p>
                   <p class="pt-2 text-cyan-100 text-md">This is a Prototype of a Stock and crypto 
                   trade information providing website.</p>
                   <p class="pt-2 text-cyan-100 text-md">This project involves 6 individuals who worked on various areas and together build this information hub.

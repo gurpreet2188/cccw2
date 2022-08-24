@@ -39,7 +39,7 @@ function Home() {
   if(load) {
     return (
       <>
-        {/* <NewsCarousel /> */}
+        <NewsCarousel />
         <div className='flex flex-col md:flex-row md:space-x-[calc(100vw/10)] md:space-y-0 space-y-4 space-x-0 w-[100%] justify-center content-center'>
           <StocksTredning />
           <CryptoTrending />

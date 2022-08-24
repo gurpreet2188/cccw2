@@ -53,7 +53,7 @@ function NewsCarousel() {
     return (
 
         <div className='px-6 flex flex-col space-y-4 w-[100%]'>
-            <h2 className='tracking-[0.5px] md:text-[18px]'>Top Articles</h2>
+            {/* <h2 className='tracking-[0.5px] md:text-[18px]'>Top Articles</h2> */}
             <Carousel defaultControlsConfig={{
                 nextButtonStyle: {
                     display: 'none'
@@ -83,7 +83,7 @@ function NewsCarousel() {
                                 <div className='hidden md:flex justify-center content-center space-x-0 rounded-lg overflow-hidden h-[20rem] w-[100%] border border-black/10'>
                                     <div style={{ backgroundImage: `url(${v.banner_image})` }} className='bg-cover bg-no-repeat bg-center w-[50%]'></div>
                                     <div className=' w-[50%] h-[100%] bg-no-repeat bg-center' style={{ backgroundImage: `url(${v.banner_image})` }}>
-                                        <div className='flex flex-col justify-center space-y-6 backdrop-blur-sm bg-black/80 text-white h-[100%] p-1'>
+                                        <div className='flex flex-col justify-center space-y-6 backdrop-blur-sm bg-black/80 text-white h-[100%] p-4'>
                                             <h1 className='text-[24px] font-extralight '>{v.title}</h1>
                                             <p className='tracking-wider text-sm'>{v.summary}</p>
                                             <a href={v.url} target='_blank' className='justify-self-end self-end text-red-400'>Continue Reading...</a>

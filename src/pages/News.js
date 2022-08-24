@@ -20,9 +20,9 @@ function News() {
 
   return (
     // Main Section
-    <div class="p-4 pb-10 flex flex-col items-center space-y-6 overflow-y-auto">
+    <div class="p-2 pb-10 flex flex-col items-center space-y-6 overflow-y-auto">
       {/* <h1>Trending News</h1> */}
-      <div class="Tnews">
+      <div class="w-[100%]">
         <NewsCarousel />
       </div>
       <h1  className='self-start text-[28px] tracking-wider font-light'>More News</h1>

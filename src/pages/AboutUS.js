@@ -1,4 +1,5 @@
 import React from 'react'
+import ContactUs from './Contactus'
 
 
 function AboutUS() {
@@ -51,7 +52,7 @@ sustainable mutual development</p>
 
       </div>
 
-      
+      <ContactUs />
     </div>
   )
 }

@@ -36,7 +36,7 @@ function News() {
                 <div className='flex flex-col space-y-4 p-4 md:basis-[50%] md:justify-between'>
                   <h1 className='text-xl font-light tracking-wide'>{v.title}</h1>
                   <p className='text-sm C-LINECLAMP-NEWS'>{v.summary}</p>
-                  <a href={v.url} className='self-end justify-self-end text-red-500 tracking-wide text-sm'>continue reding...</a>
+                  <a href={v.url} className='self-end justify-self-end text-red-500 tracking-wide text-sm'>continue reading...</a>
                 </div>
               </div>
             )

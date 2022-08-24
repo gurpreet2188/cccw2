@@ -7,6 +7,8 @@ import detail from '../data/stocks/detail'
 function StockDetail() {
     const { stockSym } = useParams()
     const [details, setDetail] = useState()
+    const [price,setPrice] = useState(0)
+    const [change, setChange] = useState(0)
     const [vals, setVals] = useState()
     const [xAxis, setXAxis] = useState()
     const [intra, setIntra] = useState()
@@ -29,6 +31,8 @@ function StockDetail() {
         let check = true
         if (check) {
             let vals = []
+            let pr = 0
+            let ch = 0
             if (localStorage.trendingIntra) {
 
                 const d = JSON.parse(localStorage.trendingIntra)
@@ -37,8 +41,18 @@ function StockDetail() {
                 const d = JSON.parse(localStorage.trendingIntra)
                 vals = d.filter(v => v.Metadata.Symbol === stockSym)
             }
+            if (localStorage.stockTrending) {
+                const d = JSON.parse(localStorage.stockTrending)
+                console.log(d)
+                const currentStock = d.items.filter(v => v.info.ticker_symbols[0] === stockSym)
+                console.log(currentStock)
+                pr = parseFloat(currentStock[0].price?.last?.value)
+                ch = parseFloat(currentStock[0].price?.after_hours?.change_percent)
+            }
             console.log(vals)
             setIntra(vals)
+            setPrice(pr)
+            setChange(ch)
 
         }
         return () => {
@@ -73,7 +87,7 @@ function StockDetail() {
 
     const commonDetail = () => {
         return (
-            <CommonDetails name={details.Name} sym={details.Symbol} summary={details.Description} chart={{'xAxis': xAxis, 'vals': vals}} />
+            <CommonDetails name={details.Name} sym={details.Symbol} summary={details.Description} price={price} change={change} chart={{'xAxis': xAxis, 'vals': vals}} />
         )
     }
     return (

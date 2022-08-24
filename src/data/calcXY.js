@@ -1,6 +1,7 @@
 
 
 function calcXY(data, dataName, size) {
+    // console.log(data[0][dataName])
     const baseNum = size / data.length
     let vals = []
     let xAxis = []

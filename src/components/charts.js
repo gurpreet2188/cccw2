@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 function Charts({ xAxis, xAxisLeg, vals, yMax, yMin, w, h, type }) {
-    // console.log(vals, 'test')
+    console.log(xAxis, 'test')
     const [yAxis, setYAxis] = useState([])
     const [yLeg, setYLeg] = useState({ 'max': 0, 'min': 0 })
     const [color, setColor] = useState('#00FF00')

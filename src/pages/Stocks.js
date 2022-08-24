@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import ListCommon from '../components/ListCommon'
 import stocksIntraExtra from '../data/stocksIntraExtra'
 import Charts from '../components/charts'
+import calcXY from '../data/calcXY'
 
 function Stocks() {
   const [data, setData] = useState()
@@ -45,9 +46,6 @@ function Stocks() {
       if (filtered.length > 0) {
         setHeader(['Name', 'Ticker', 'Value', 'Change', 'Change %', 'Previous Close', 'Tracking'])
         setPrimaryList(filtered[stockPage])
-        // filtered[stockPage].map((v, i) => {
-        //   setPrimaryList(primaryList => [...primaryList, v])
-        // })
         setPrimaryListEntries([(v) => v?.info?.title,
         (v) => v?.info?.ticker,
         (v, i) => roundNum(v?.price?.last?.value),
@@ -99,8 +97,6 @@ function Stocks() {
     let check = true
     if (check) {
       if (primaryList) {
-        // const temp = tredning.items.slice(0, 7)
-        // console.log(temp[0].info.ticker_symbols[0])
         let s = []
         primaryList.map((v) => {
           s = [...s, v.info.ticker_symbols[0]]
@@ -146,7 +142,8 @@ function Stocks() {
           }
           for (let x = 0; x < a.length; x++) {
             if (a[x].info.ticker_symbols[0] === b[i].Metadata.Symbol) {
-              t.push(b[i])
+              // t.push(b[i])
+              t = [...t, b[i]]
               console.log(b[i])
             }
           }
@@ -158,40 +155,24 @@ function Stocks() {
 
         }
 
-        reorder(primaryList, intra, 0, (primaryList.length - 1))
-        console.log(t, 'reorder')
-        t.map((v) => {
-          // console.log(v.Results, 'test')
+        // reorder(primaryList, intra, 0, (primaryList.length - 1))
+        console.log(t.length, 'reorder')
+        intra.map((v) => {
           //get unix date
-          // const lastUnixDate = Date.parse(v?.Results[v?.Results?.length - 1].Date.split(' ')[0])
-          //filter through 
-          // let filteredData = v?.Results.filter(f => Date.parse(f?.Date.split(' ')[0]) === lastUnixDate)
-          // if (filteredData.length < 3) {
-          const filteredData = v?.Results.slice(-20)
-          // }
-          console.log(filteredData, 'test')
-          //set short listed
-          // setShortList(filteredData)
-          // baseNum
-          const baseNum = size / filteredData.length
-          // console.log(baseNum, 'test')
-          //set vals
-          // console.log('test')
-          // if (vals.length === 0) {
-          // let vl = []
-          // let x = []
-          filteredData.map((fv, fi) => {
-            vl = [...vl, parseFloat(fv?.High)]
-            x = [...x, (baseNum * fi)]
-            // setVals(vals => [...vals, parseFloat(fv?.High)])
-            // setXAxis(xAxis => [...xAxis, (baseNum * fi)])
-          })
-          // 
+          const lastUnixDate = Date.parse(v?.Results[v?.Results?.length - 1].Date.split(' ')[0])
+          // filter through 
+          let filteredData = v?.Results.filter(f => Date.parse(f?.Date.split(' ')[0]) === lastUnixDate)
+          if (filteredData.length < 3) {
+            filteredData = v?.Results.slice(-12)
+          }
 
-          // console.log(x, )
 
-          // }
+          // [vl, x] = calcXY(filteredData, 'High', size)
+          vl = [...vl, ...calcXY(filteredData, 'High', size)[0]]
+          x = calcXY(filteredData, 'High', size)[1]
         })
+        
+        console.log(vl, 'vals')
         setVals(vl)
         setXAxis(x)
       }
@@ -204,17 +185,8 @@ function Stocks() {
 
   }, [intra])
   // 
-  console.log(finalXAxis, 'xaxis')
+  console.log(xAxis, 'xaxis')
 
-
-  // useEffect(() => {
-  //   // if (Array.isArray(xAxis)) {
-  //     if (xAxis instanceof Array) {
-  //       setRenderLis(true)
-
-  //     }
-  //   // }
-  // }, [xAxis, vals])
 
   useEffect(() => {
     let check = true
@@ -223,9 +195,10 @@ function Stocks() {
         let fv = []
         let fx = []
         let uN = []
-        for (let i = 0; i < vals.length; i += 10) {
-          const c = vals.slice(i, i + 10)
-          fv.push(c)
+        for (let i = 0; i < vals.length; i += 13) {
+          console.log(fv, 'xaxis')
+          const c = vals.slice(i, i + 13)
+          fv = [...fv, c]
         }
         for (let i = 0; i < xAxis.length; i += 10) {
           const c = xAxis.slice(i, i + 10)
@@ -234,7 +207,7 @@ function Stocks() {
         setFinalVals(fv)
         setFinalXAxis(fx)
         // console.log('test vals')
-        setDetailURL(() => (v) => '/stocks-detail/' + v?.info?.ticker_symbols[0] )
+        setDetailURL(() => (v) => '/stocks-detail/' + v?.info?.ticker_symbols[0])
       }
     }
     return () => {
@@ -247,7 +220,7 @@ function Stocks() {
 
   const listCommon = () => {
     return (
-      <ListCommon HeaderData={header} PrimaryListData={primaryList} PrimaryListDataEntries={primaryListEntries} charts={{ 'xAxis': finalXAxis, 'vals': finalVals }} urlType={detailURL} />
+      <ListCommon HeaderData={header} PrimaryListData={primaryList} PrimaryListDataEntries={primaryListEntries} charts={{ 'xAxis': xAxis, 'vals': finalVals }} urlType={detailURL} />
     )
   }
 

@@ -53,7 +53,7 @@ function StocksTredning() {
     useEffect(() => {
         let check = true
         if (check) {
-            if (tredning?.items) {
+            if (tredning && tredning.hasOwnProperty('items')) {
                 const temp = tredning.items.slice(0, 7)
                 // console.log(temp[0].info.ticker_symbols[0])
                 temp.map((v) => {
@@ -127,7 +127,7 @@ function StocksTredning() {
 
                     <div className='flex flex-col space-y-3'>
 
-                        {tredning ? tredning?.items.slice(0, 7).map((v, i) => {
+                        {(tredning && tredning.hasOwnProperty('items')) ? tredning?.items.slice(0, 7).map((v, i) => {
 
                             return (
                                 <li key={i} className='flex flex-row justify-center content-center p-4 h-[4rem] bg-slate-50'>

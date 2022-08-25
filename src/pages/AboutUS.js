@@ -9,7 +9,7 @@ function AboutUS() {
       {/* <h2>AboutUS</h2> */}
       <div class="antialiased bg-gray-100">
         <div class="flex w-full min-h-screen justify-center items-center">
-          <div class=" flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0 bg-cyan-700 w-full max-w-4xl p-8 rounded-xl shadow-lg text-white">
+          <div class=" flex flex-col overflow-hidden md:flex-row md:space-x-6 space-y-6 md:space-y-0 bg-cyan-700 w-full max-w-4xl p-8 rounded-xl shadow-lg text-white">
             <div class="flex flex-col space-y-8 justify-between">
               <div>
                   <h2 class="font-bold text-4xl tracking-wide">About Us</h2>
@@ -43,13 +43,13 @@ sustainable mutual development</p>
                 <h2>Google</h2>
                 <h2>LinkedIn</h2>
               </div>
-              <div class="flex space-x-6">
-                <img src={mainimage} width="400"></img>
-              </div>
             </div>
             <div>
               
             </div>
+              <div class="flex justify-self-center m-auto space-x-6 min-w-[30%] min-h-[30%] bg-no-repeat bg-contain" style={{backgroundImage: `url(${mainimage})`}}>
+                {/* <img src={mainimage}  height='2rem'></img> */}
+              </div>
           </div>
 
         </div>

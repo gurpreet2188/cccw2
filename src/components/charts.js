@@ -23,12 +23,35 @@ function Charts({ xAxis, xAxisLeg, vals, yMax, yMin, w, h, type, txtColor }) {
             })
             setYAxis(xy)
             // }
-            vals[0] > vals[vals.length - 1] ? setColor('#FF0000') : setColor(color)
+            vals[0] > vals[vals.length - 1] ? setColor('#FF0000') : setColor('#00FF00')
         }
         console.log(vals, 'chart')
     }, [vals, xAxis, yMax, yMin])
 
+    const polyType = ()=>{
+        if(type === 'compact') {
+            return (
+                <polyline
+                fill="none"
+                // style={{fill: 'url(#grad1)'}}
+                stroke={color}
+                strokeWidth="0.8"
+                points={`${yAxis ? yAxis : ''}`}
+            />
+            )
 
+        }else {
+            return(
+                <polygon
+                // fill="#grad1"
+                style={{fill: 'url(#grad1)'}}
+                // stroke={color}
+                strokeWidth="0.8"
+                points={`0,${h} ${yAxis ? yAxis : ''}, ${w},${h}`}
+            />
+            )
+        }
+    }
 
     // console.log(yAxis, vals)
     return (
@@ -52,13 +75,7 @@ function Charts({ xAxis, xAxisLeg, vals, yMax, yMin, w, h, type, txtColor }) {
                 </linearGradient>
             </defs>
             
-            <polygon
-                // fill="#grad1"
-                style={{fill: 'url(#grad1)'}}
-                // stroke={color}
-                strokeWidth="0.8"
-                points={`0,${h} ${yAxis ? yAxis : ''}, ${w},${h}`}
-            />
+            {polyType()}
 
             <g style={{ visibility: 'hidden', }}>
                 <text x='10' y='12' style={{ fill: '#fff' }}>{parseInt(yLeg.max)}</text>

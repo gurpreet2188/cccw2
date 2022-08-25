@@ -227,6 +227,7 @@ function Stocks() {
 
   return (
     <div className='flex flex-col items-center space-y-4 p-2'>
+      <h1  className='self-start text-[28px] tracking-wider font-light'>Stocks</h1>
       <div className='w-[100%] border border-black/10 rounded-md'>
         {(xAxis && finalVals) ? listCommon() : 'Loading...'}
       </div>

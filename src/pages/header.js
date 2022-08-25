@@ -88,7 +88,8 @@ function Header() {
       </div>
 
       <div className='absolute text-white top-[8rem] text-center w-[50vw] left-[25%]'>
-        <p className='tracking-[1px] text-[24px]' style={{ display: headerImage ? '' : 'none' }}>We Are Stockto, blah blah blah</p>
+        <p className='tracking-[1px] text-[24px]' style={{ display: headerImage ? '' : 'none' }}>We are STOCkTO Integrated Stock & Crypto Information View your overall asset
+Get inspiration on trending asset</p>
       </div>
           <div onClick={()=>{setNav(!nav)}} className={`z-10 bg-transparent h-screen w-screen fixed md:hidden ${nav? '' : 'hidden'  }`} >
 

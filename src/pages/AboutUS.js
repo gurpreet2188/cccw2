@@ -1,5 +1,6 @@
 import React from 'react'
 import ContactUs from './Contactus'
+import mainimage from '../assets/MAIN_PAGEjpg.jpg'
 
 
 function AboutUS() {
@@ -41,6 +42,9 @@ sustainable mutual development</p>
                 <h2>Insta</h2>
                 <h2>Google</h2>
                 <h2>LinkedIn</h2>
+              </div>
+              <div class="flex space-x-6">
+                <img src={mainimage} width="400"></img>
               </div>
             </div>
             <div>

@@ -4,7 +4,7 @@ import ContactUs from './Contactus'
 
 function AboutUS() {
   return (
-    <div>
+    <div className='flex flex-col space-y-6'>
       {/* <h2>AboutUS</h2> */}
       <div class="antialiased bg-gray-100">
         <div class="flex w-full min-h-screen justify-center items-center">

@@ -49,6 +49,7 @@ function Header() {
         <nav className='hidden md:block'>
           <div className='flex flex-row text-white space-x-5 p-4 rounded-md backdrop-blur-sm bg-black/30'>
             {/* <Link className='' to='/myassest'>My Assest</Link> */}
+            <Link to='/' >Home</Link>
             <Link to='/crypto/1' >Crypto</Link>
             <Link to='/stocks/1' >Stocks</Link>
             <Link to='/news'>News</Link>
@@ -94,6 +95,7 @@ function Header() {
           </div>
       <div className={`fixed ${nav ? 'NAV-OPEN' : 'NAV-CLOSE'} top-0 right-0 z-20 flex flex-col space-y-5 backdrop-blur-sm bg-black/30 py-28 px-4 h-screen w-[50vw] transform transition duration-500 ease-in-out text-white lg:hidden`}>
         {/* <Link className='mt-16' to='/myassest'>My Assest</Link> */}
+        <Link to='/' >Home</Link>
         <Link to='/crypto/1' onClick={()=>{setNav(!nav)}}>Crypto</Link>
         <Link to='/stocks/1' onClick={()=>{setNav(!nav)}}>Stocks</Link>
         <Link to='/news' onClick={()=>{setNav(!nav)}}>News</Link>
